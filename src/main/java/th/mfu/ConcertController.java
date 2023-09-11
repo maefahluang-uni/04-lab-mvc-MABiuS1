@@ -20,14 +20,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ConcertController {
-    private HashMap<Integer, Concert> concerts = new HashMap<>();
+    private HashMap<Integer,Concert> concerts = new HashMap<Integer,Concert>();
     private int nextId = 1;
 
     // InitBinder to convert date
     @InitBinder
-    public void initBinder(WebDataBinder dataBinder) { 
-        nextId = 1;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+    public final void initBinderUsuariosFormValidator(final WebDataBinder binder, final Locale locale) {
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", locale);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
     
 
